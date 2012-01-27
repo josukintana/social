@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  name: MyString
+  sex: false
+  birthdate: 2012-01-27
+  user_id: 
+
+two:
+  name: MyString
+  sex: false
+  birthdate: 2012-01-27
+  user_id: 
