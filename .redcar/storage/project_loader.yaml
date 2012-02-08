@@ -1,0 +1,10 @@
+--- 
+open_files: 
+  - app/models/user.rb
+  - app/models/group.rb
+  - app/models/profile.rb
+  - app/helpers/users_helper.rb
+  - app/helpers/groups_management.rb
+  - app/helpers/profiles_management.rb
+  - app/models/membership.rb
+  - app/models/ownership.rb
