@@ -2,6 +2,7 @@ module ProfilesManagement
   def self.included(base)
     base.send :include, InstanceMethods
     base.send :extend, ClassMethods
+    base.send :initialize
   end
  
   module InstanceMethods
@@ -11,7 +12,7 @@ module ProfilesManagement
   end
  
   module ClassMethods
-    def profileable
+    def initialize
       has_one :profile
       
       after_create :create_profile

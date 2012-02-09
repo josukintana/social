@@ -2,8 +2,9 @@ module GroupsManagement
   def self.included(base)
     base.send :include, InstanceMethods
     base.send :extend, ClassMethods
+    base.send :initialize
   end
- 
+  
   module InstanceMethods
     def add_group(name)
       self.groups.create(:name => name)
@@ -15,7 +16,7 @@ module GroupsManagement
   end
  
   module ClassMethods
-    def groupable
+    def initialize
       has_many :memberships
       has_many :ownerships, :dependent => :destroy
       has_many :groups, :through => :ownerships
