@@ -6,8 +6,8 @@
 development:
   adapter: mysql2
   database: social_development
-  username: social_user
-  password: $0c1@L2012
+  username: RALOMEQ
+  password: 070811rlmq
   host: localhost
   socket: /var/run/mysqld/mysqld.sock
 
@@ -17,15 +17,15 @@ development:
 test:
   adapter: mysql2
   database: social_test
-  username: social_user
-  password: $0c1@L2012
+  username: RALOMEQ
+  password: 070811rlmq
   host: localhost
   socket: /var/run/mysqld/mysqld.sock
 
 production:
   adapter: mysql2
   database: social_production
-  username: social_user
-  password: $0c1@L2012
+  username: RALOMEQ
+  password: 070811rlmq
   host: localhost
   socket: /var/run/mysqld/mysqld.sock

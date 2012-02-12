@@ -20,11 +20,13 @@ group :assets do
   gem 'uglifier', '>= 1.0.3'
 end
 
-group :development do
+group :test do
   gem 'cucumber'
+  gem 'cucumber-rails'
 end
 
 gem 'jquery-rails'
+gem 'private_pub'
 
 # To use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.0.0'
