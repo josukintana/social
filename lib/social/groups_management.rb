@@ -17,18 +17,18 @@ module GroupsManagement
     def add_group(name, description = "")
       if (!group_exists?(name))
         self.groups.create(:name => name, :description => description)
-        return "El grupo '" + name + "' ha sido correctamente creado."
+        return "The group '" + name + "' has been correctly created."
       else
-        return "El grupo '" + name + "' ya existe."  
+        return "The group '" + name + "' already exists."  
       end
     end
     
     def remove_group(name)
       if (group_exists?(name))
         self.groups.find_by_name(name).destroy
-        return "El grupo '" + name + "' ha sido correctamente eliminado."
+        return "The group '" + name + "' has been correctly removed."
       else
-        return "El grupo '" + name + "' no existe."
+        return "The group '" + name + "' doesn't exist."
       end
     end
   end
