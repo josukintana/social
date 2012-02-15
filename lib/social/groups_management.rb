@@ -6,12 +6,30 @@ module GroupsManagement
   end
   
   module InstanceMethods
-    def add_group(name)
-      self.groups.create(:name => name)
+    def group_exists?(name)
+      if (self.groups.find_by_name(name).nil?)
+        return false
+      else
+        return true
+      end
+    end
+    
+    def add_group(name, description = "")
+      if (!group_exists?(name))
+        self.groups.create(:name => name, :description => description)
+        return "El grupo '" + name + "' ha sido correctamente creado."
+      else
+        return "El grupo '" + name + "' ya existe."  
+      end
     end
     
     def remove_group(name)
-      self.groups.find_by_name(name).destroy
+      if (group_exists?(name))
+        self.groups.find_by_name(name).destroy
+        return "El grupo '" + name + "' ha sido correctamente eliminado."
+      else
+        return "El grupo '" + name + "' no existe."
+      end
     end
   end
  
