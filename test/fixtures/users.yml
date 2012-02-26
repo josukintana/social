@@ -1,0 +1,15 @@
+fred:
+  id: 1
+  email: "fred@email.com"
+
+mary:
+  id: 2
+  email: "mary@email.com"
+  
+peter:
+  id: 3
+  email: "peter@email.com"
+  
+john:
+  id: 4
+  email: "john@email.com"

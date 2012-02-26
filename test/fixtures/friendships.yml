@@ -1,0 +1,14 @@
+one:  #John is a friend of Peter
+  user_id: 3
+  friend_id: 4
+  status: "accepted"
+
+two:  #Peter is a friend of John
+  user_id: 4
+  friend_id: 3
+  status: "accepted"
+
+three: #Peter is a blocked friend of Mary
+  user_id: 2
+  friend_id: 3
+  status: "blocked"
