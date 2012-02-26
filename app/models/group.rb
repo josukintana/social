@@ -1,6 +1,5 @@
 class Group < ActiveRecord::Base
   # Setup accessible (or protected) attributes for your model
-  attr_accessible :name, :description, :member_ids
   
   has_many :memberships, :dependent => :destroy
   has_many :members, :through => :memberships, :source => :user

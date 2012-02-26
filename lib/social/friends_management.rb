@@ -11,6 +11,9 @@ module FriendsManagement
     end
     
     def is_friend_of?(friend)
+      # Determines if a user is already a friend of mine
+      # @param [Friend] the user I wonder if he is my friend
+      # @return true or false
       if (self.non_friends.include?(friend))
         return false  
       else
@@ -39,7 +42,6 @@ module FriendsManagement
       if (self.can_request_to?(friend))     #Only someone who is not still my friend can be requested
         if (!friend.is_blocked_by?(self))
           self.friendships.create(:friend_id => friend.id, :status => Friendship::REQUESTED)
-          return self.email + " has correctly requested " + friend.email + "'s friendship."   
         else
           return self.email + " cannot request " + friend.email + "'s friendship because he/she has previously blocked that user."
         end
