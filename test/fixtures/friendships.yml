@@ -12,3 +12,13 @@ three: #Peter is a blocked friend of Mary
   user_id: 2
   friend_id: 3
   status: "blocked"
+  
+four: #Fred has requested a friendship to Peter
+  user_id: 1
+  friend_id: 3
+  status: "requested"
+  
+five: #Peter has a friendship request from Fred
+  user_id: 3
+  friend_id: 1
+  status: "pending"

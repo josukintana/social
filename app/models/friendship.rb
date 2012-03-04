@@ -16,17 +16,11 @@ class Friendship < ActiveRecord::Base
   scope :by_friend, lambda { |friend| where( :friend_id => friend.id)}
           
   def accept
-    self.status = ACCEPTED
-    self.save
+    self.update_attributes(:status => ACCEPTED)
   end
   
   def reject
-    self.status = REJECTED
-    self.save
+    self.update_attributes(:status => REJECTED)
   end
-  
-  def block
-    self.status = BLOCKED
-    self.save
-  end
+
 end

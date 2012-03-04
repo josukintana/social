@@ -55,6 +55,7 @@ module FriendsManagement
     def cancel_request_to(friend)
       if (self.requested_friends.include?(friend))
         self.friendships.by_friend(friend).requested.first.destroy #Cancel my friendship request.
+        friend.friendships.by_friend(self).pending.first.destroy #Cancel my friend's pending request.
         return self.email + "'s friendship request to " + friend.email + " has been correctly canceled."
       end
     end
@@ -77,8 +78,10 @@ module FriendsManagement
     
     def cancel_friendship_with(friend)
       if (self.is_friend_of?(friend))
-        self.friendships.by_friend(friend).first.destroy #My friendship is destroyed.
-        friend.friendships.by_friend(self).first.destroy #My friend's friendship is destroyed.
+        self.friendships.by_friend(friend).accepted.first.destroy #My friendship is destroyed.
+        self.reload
+        friend.friendships.by_friend(self).accepted.first.destroy #My friend's friendship is destroyed.
+        friend.reload
         return self.email + " and " + friend.email + " are not friends anymore."
       else
         return self.email + " is not a friend of" + friend.email + "."
