@@ -14,9 +14,9 @@ module GroupsManagement
       end
     end
     
-    def add_group(name, description = "")
+    def add_group(name)
       if (!group_exists?(name))
-        self.groups.create(:name => name, :description => description)
+        self.groups.create(:name => name)
         return "The group '" + name + "' has been correctly created."
       else
         return "The group '" + name + "' already exists."  

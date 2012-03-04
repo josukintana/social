@@ -1,0 +1,3 @@
+one:  #Mary is following to Peter
+  user_id: 2
+  followed_id: 3
