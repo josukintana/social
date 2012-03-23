@@ -1,9 +1,13 @@
 Social::Application.routes.draw do
+  resources :walls
+
   resources :groups
 
   resources :profiles
 
   resources :users
+  
+  resources :messages
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

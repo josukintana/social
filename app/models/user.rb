@@ -3,4 +3,5 @@ class User < ActiveRecord::Base
   include GroupsManagement
   include FriendsManagement
   include FollowmentManagement
+  has_one :wall
 end

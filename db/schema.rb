@@ -11,8 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120304210350) do
-
+ActiveRecord::Schema.define(:version => 20120321184751) do
   create_table "followments", :force => true do |t|
     t.integer  "user_id"
     t.integer  "followed_id"
@@ -51,6 +50,13 @@ ActiveRecord::Schema.define(:version => 20120304210350) do
   add_index "memberships", ["group_id"], :name => "index_memberships_on_group_id"
   add_index "memberships", ["user_id"], :name => "index_memberships_on_user_id"
 
+  create_table "messages", :force => true do |t|
+    t.string   "title"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+    t.text     "content"
+  end
+
   create_table "ownerships", :force => true do |t|
     t.integer  "user_id"
     t.integer  "group_id"
@@ -74,6 +80,12 @@ ActiveRecord::Schema.define(:version => 20120304210350) do
 
   create_table "users", :force => true do |t|
     t.string   "email"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  create_table "walls", :force => true do |t|
+    t.integer  "user_id"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
   end
