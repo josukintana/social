@@ -12,7 +12,7 @@ module FriendsManagement
     
     def is_friend_of?(friend)
       # Determines if a user is already a friend of mine
-      self.non_friends.include?(friend)
+      self.friends.include?(friend)
     end
     
     def is_blocked_by?(friend)
@@ -20,25 +20,13 @@ module FriendsManagement
     end
     
     def can_request_to?(friend)
-      if ((!self.is_friend_of?(friend)) && (!self.pending_friends.include?(friend)) && (!self.requested_friends.include?(friend)))
-        #We are not friends and we are not in process to be
-        return true
-      else
-        return false
-      end
+      ((!self.is_friend_of?(friend)) && (!self.pending_friends.include?(friend)) && (!self.requested_friends.include?(friend)))
     end
     
     def request_friendship_to(friend)
       if (self.can_request_to?(friend))     #Only someone who is not still my friend can be requested
-        if (!friend.is_blocked_by?(self))
-          self.friendships.create(:friend_id => friend.id, :status => Friendship::REQUESTED)
-        else
-          return self.email + " cannot request " + friend.email + "'s friendship because he/she has previously blocked that user."
-        end
-        
-        if (!self.is_blocked_by?(friend)) #If my friend has not blocked me, he'll be notified about my request
-          friend.friendships.create(:friend_id => self.id, :status => Friendship::PENDING)
-        end
+        friend.friendships.create(:friend_id => self.id, :status => Friendship::PENDING) if !self.is_blocked_by?(friend)
+        !friend.is_blocked_by?(self) ? self.friendships.create(:friend_id => friend.id, :status => Friendship::REQUESTED) : self.email + " cannot request " + friend.email + "'s friendship because he/she has previously blocked that user."
       end
     end
     
@@ -46,7 +34,7 @@ module FriendsManagement
       if (self.requested_friends.include?(friend))
         self.friendships.by_friend(friend).requested.first.destroy #Cancel my friendship request.
         friend.friendships.by_friend(self).pending.first.destroy #Cancel my friend's pending request.
-        return self.email + "'s friendship request to " + friend.email + " has been correctly canceled."
+        self.email + "'s friendship request to " + friend.email + " has been correctly canceled."
       end
     end
     
@@ -54,7 +42,7 @@ module FriendsManagement
       if (self.pending_friends.include?(friend))
         self.friendships.by_friend(friend).pending.first.accept #I'm the friend of my friend.
         friend.friendships.by_friend(self).requested.first.accept #My friend is a friend of mine.
-        return self.email + " and " + friend.email + " are now friends."
+        self.email + " and " + friend.email + " are now friends."
       end
     end
     
@@ -62,37 +50,35 @@ module FriendsManagement
       if (self.pending_friends.include?(friend))
         self.friendships.by_friend(friend).pending.first.destroy #My friendship is destroyed.
         friend.friendships.by_friend(self).requested.first.reject #My friend's friendship is marked as rejected.
-        return self.email + " has correctly rejected " + friend.email + "'s friendship request."
+        self.email + " has correctly rejected " + friend.email + "'s friendship request."
       end
     end
     
     def cancel_friendship_with(friend)
       if (self.is_friend_of?(friend))
         self.friendships.by_friend(friend).accepted.first.destroy #My friendship is destroyed.
-        self.reload
         friend.friendships.by_friend(self).accepted.first.destroy #My friend's friendship is destroyed.
-        friend.reload
-        return self.email + " and " + friend.email + " are not friends anymore."
+        self.email + " and " + friend.email + " are not friends anymore."
       else
-        return self.email + " is not a friend of" + friend.email + "."
+        self.email + " is not a friend of" + friend.email + "."
       end
     end
     
     def block_friend(friend)
       if ((self.can_request_to?(friend)) && (!self.blocked_friends.include?(friend)))
         self.friendships.create(:friend_id => friend.id, :status => Friendship::BLOCKED) #My friendship is blocked.
-        return self.email + " has correctly blocked " + friend.email + "."
+        self.email + " has correctly blocked " + friend.email + "."
       else
-        return "The user " + friend.email + " couldn't be blocked by " + self.email + "." 
+        "The user " + friend.email + " couldn't be blocked by " + self.email + "." 
       end
     end
     
     def unblock_friend(friend)
       if (self.blocked_friends.include?(friend))
         self.friendships.by_friend(friend).first.destroy #The blocked friendship is destroyed.
-        return self.email + " has correctly unblocked " + friend.email + "."
+        self.email + " has correctly unblocked " + friend.email + "."
       else
-        return "The user " + friend.email + " wasn't blocked by " + self.email + "." 
+        "The user " + friend.email + " wasn't blocked by " + self.email + "." 
       end
     end
   end
