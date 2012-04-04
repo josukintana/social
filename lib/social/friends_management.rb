@@ -12,21 +12,11 @@ module FriendsManagement
     
     def is_friend_of?(friend)
       # Determines if a user is already a friend of mine
-      # @param [Friend] the user I wonder if he is my friend
-      # @return true or false
-      if (self.non_friends.include?(friend))
-        return false  
-      else
-        return true
-      end
+      self.non_friends.include?(friend)
     end
     
     def is_blocked_by?(friend)
-      if (friend.blocked_friends.include?(self))
-        return true  
-      else
-        return false
-      end
+      friend.blocked_friends.include?(self)
     end
     
     def can_request_to?(friend)
