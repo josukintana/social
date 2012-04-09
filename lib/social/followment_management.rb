@@ -15,45 +15,25 @@ module FollowmentManagement
     end
     
     def is_followed_by?(user)
-      if (self.non_followers.include?(user))
-        return false  
-      else
-        return true
-      end
+      self.non_followers.include?(user)
     end
     
     def is_following_to?(user)
-      if (self.non_followeds.include?(user))
-        return false  
-      else
-        return true
-      end
+      !self.non_followeds.include?(user)
     end
     
     def is_blocked_by?(friend)
-      if (friend.blocked_friends.include?(self))
-        return true  
-      else
-        return false
-      end
+      friend.blocked_friends.include?(self)
     end
     
     def follow(user)
-      if (!self.is_following_to?(user))     #Only someone who is not being followed can be followed
-          self.followments.create(:followed_id => user.id)
-          return self.email + " is now following " + user.email + "."   
-      else
-        return self.email + " is already following " + user.email + "."
-      end
+      self.followments.create(:followed_id => user.id) if !self.is_following_to?(user)
+      !self.is_following_to?(user) ? self.email + " is now following " + user.email + "." : self.email + " is already following " + user.email + "."
     end
     
     def unfollow(user)
-      if (self.is_following_to?(user))     #Only someone who is being followed can be unfollowed
-          self.followments.find_by_followed_id(user.id).destroy
-          return self.email + " has just left following " + user.email + "."   
-      else
-        return self.email + " was not following " + user.email + "."
-      end
+      self.followments.find_by_followed_id(user.id).destroy if self.is_following_to?(user) #Only someone who is being followed can be unfollowed
+      self.is_following_to?(user) ? self.email + " has just left following " + user.email + "." : self.email + " was not following " + user.email + "."
     end
   end
  
