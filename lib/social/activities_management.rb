@@ -28,10 +28,7 @@ module ActivitiesManagement
   module InstanceMethods
     def update_activities_among_walls
       friendships = self.user.friendships
-      #friendships.each {|friendship| friendship.friend.wall.activities.create(:user_id => friendship.friend.id, :text_comment_title => self.text_comment_title, :text_comment => self.text_comment)}
-      friendships.each do |friendship|
-        friendship.friend.wall.activities << self
-      end
+      friendships.each {|friendship| friendship.friend.wall.activities << self }
     end
     
   end
