@@ -1,0 +1,37 @@
+<h1>Listing activities</h1>
+
+<table>
+  <tr>
+    <th>Wall</th>
+    <th>Text comment title</th>
+    <th>Text comment</th>
+    <th>Img file name</th>
+    <th>Img content type</th>
+    <th>Img file size</th>
+    <th>Img updated at</th>
+    <th>Src url</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @activities.each do |activity| %>
+  <tr>
+    <td><%= activity.wall_id %></td>
+    <td><%= activity.text_comment_title %></td>
+    <td><%= activity.text_comment %></td>
+    <td><%= activity.img_file_name %></td>
+    <td><%= activity.img_content_type %></td>
+    <td><%= activity.img_file_size %></td>
+    <td><%= activity.img_updated_at %></td>
+    <td><%= activity.src_url %></td>
+    <td><%= link_to 'Show', activity %></td>
+    <td><%= link_to 'Edit', edit_activity_path(activity) %></td>
+    <td><%= link_to 'Destroy', activity, confirm: 'Are you sure?', method: :delete %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Activity', new_activity_path %>

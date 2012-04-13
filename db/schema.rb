@@ -11,7 +11,23 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120321184751) do
+ActiveRecord::Schema.define(:version => 20120413093917) do
+
+  create_table "activities", :force => true do |t|
+    t.integer  "wall_id"
+    t.string   "text_comment_title"
+    t.text     "text_comment"
+    t.string   "img_file_name"
+    t.string   "img_content_type"
+    t.integer  "img_file_size"
+    t.datetime "img_updated_at"
+    t.string   "src_url"
+    t.datetime "created_at",         :null => false
+    t.datetime "updated_at",         :null => false
+    t.integer  "user_id"
+    t.string   "user_fullname"
+  end
+
   create_table "followments", :force => true do |t|
     t.integer  "user_id"
     t.integer  "followed_id"
@@ -82,6 +98,13 @@ ActiveRecord::Schema.define(:version => 20120321184751) do
     t.string   "email"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
+  end
+
+  create_table "wallevents", :force => true do |t|
+    t.integer  "wall_id"
+    t.integer  "activity_id"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
   end
 
   create_table "walls", :force => true do |t|

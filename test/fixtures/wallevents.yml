@@ -1,9 +1,9 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
 
-fred_wall:
-  id: 1
-  user_id: 1
+one:
+  wall_id: 1
+  activity_id: 1
 
-peter_wall:
-  id: 2
-  user_id: 3
+two:
+  wall_id: 1
+  activity_id: 1

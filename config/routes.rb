@@ -1,4 +1,6 @@
 Social::Application.routes.draw do
+  resources :activities
+
   resources :walls
 
   resources :groups

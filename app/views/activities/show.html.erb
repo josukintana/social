@@ -1,0 +1,45 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Wall:</b>
+  <%= @activity.wall_id %>
+</p>
+
+<p>
+  <b>Text comment title:</b>
+  <%= @activity.text_comment_title %>
+</p>
+
+<p>
+  <b>Text comment:</b>
+  <%= @activity.text_comment %>
+</p>
+
+<p>
+  <b>Img file name:</b>
+  <%= @activity.img_file_name %>
+</p>
+
+<p>
+  <b>Img content type:</b>
+  <%= @activity.img_content_type %>
+</p>
+
+<p>
+  <b>Img file size:</b>
+  <%= @activity.img_file_size %>
+</p>
+
+<p>
+  <b>Img updated at:</b>
+  <%= @activity.img_updated_at %>
+</p>
+
+<p>
+  <b>Src url:</b>
+  <%= @activity.src_url %>
+</p>
+
+
+<%= link_to 'Edit', edit_activity_path(@activity) %> |
+<%= link_to 'Back', activities_path %>

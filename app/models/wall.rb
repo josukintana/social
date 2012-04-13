@@ -1,3 +1,3 @@
 class Wall < ActiveRecord::Base
-  belongs_to :user
+  include WallsManagement
 end
