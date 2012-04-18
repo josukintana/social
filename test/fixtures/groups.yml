@@ -2,3 +2,8 @@ test:  #This is a group of Peter
   id: 1
   name: "Test Group"
   description: "This is a group created just for testing purposes."
+
+pgroup:  #This is a group of Peter
+  id: 2
+  name: "Test Group2"
+  

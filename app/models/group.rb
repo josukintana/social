@@ -1,6 +1,7 @@
 class Group < ActiveRecord::Base
   # Setup accessible (or protected) attributes for your model
   
+  has_many :activities
   has_many :memberships, :dependent => :destroy
   has_many :members, :through => :memberships, :source => :user
   has_one :ownership

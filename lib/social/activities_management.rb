@@ -8,13 +8,14 @@ module ActivitiesManagement
  
   module ClassMethods
     def initialize
-      attr_accessible :text_comment_title, :text_comment, :img_file_name, :user_id,
+      attr_accessible :text_comment_title, :text_comment, :img_file_name, :user_id, :group_id,
                       :img_content_type, :img_file_size, :img_updated_at, :src_url, :user_fullname
                       
                       
       #has_attached_file :img, {:styles => {:thumb => "114x114>", :medium => "216x156>"}}
       
       belongs_to :user
+      belongs_to :group
       has_many :wallevents
       has_many :walls, :through => :wallevents
       
@@ -26,9 +27,10 @@ module ActivitiesManagement
   end
   
   module InstanceMethods
+    
     def update_activities_among_walls
-      friendships = self.user.friendships
-      friendships.each {|friendship| friendship.friend.wall.activities << self }
+      # IF the user dosn't select a particular group, then we apdate all friend's wall.
+      !self.group.nil? ? self.group.members.each {|member| member.wall.activities << self if member.id != self.user_id} : self.user.friendships.each {|friendship| friendship.friend.wall.activities << self } 
     end
     
   end

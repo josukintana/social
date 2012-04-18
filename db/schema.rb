@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120413093917) do
+ActiveRecord::Schema.define(:version => 20120417122707) do
 
   create_table "activities", :force => true do |t|
     t.integer  "wall_id"
@@ -26,6 +26,7 @@ ActiveRecord::Schema.define(:version => 20120413093917) do
     t.datetime "updated_at",         :null => false
     t.integer  "user_id"
     t.string   "user_fullname"
+    t.integer  "group_id"
   end
 
   create_table "followments", :force => true do |t|

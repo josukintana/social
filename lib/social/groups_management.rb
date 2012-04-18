@@ -19,6 +19,7 @@ module GroupsManagement
       self.groups.find_by_name(name).destroy if group_exists?(name)
       group_exists?(name) ? "The group '" + name + "' has been correctly removed." : "The group '" + name + "' doesn't exist."
     end
+    
   end
  
   module ClassMethods
