@@ -18,6 +18,12 @@ class ActivityTest < ActiveSupport::TestCase
     assert_equal 1, @fred.wall.activities.count
   end
   
+  test "I can't create an activity without a user id" do
+    @fred_wall.activities.create(:text_comment_title => 'title comment', :text_comment => 'text comment')
+    
+    assert_equal 0, @fred.wall.activities.count
+  end
+  
   test "Update wall activities friend's" do
     fred_activity = @fred_wall.activities.create(:user_id => @fred.id, :text_comment_title => 'title comment', :text_comment => 'text comment')
     peter_activity = @peter.wall.activities
@@ -35,6 +41,15 @@ class ActivityTest < ActiveSupport::TestCase
     assert_equal 2, Group.last.members.count
     assert_equal 1, @fred.wall.activities.count
     assert_equal 1, @peter.wall.activities.count
+  end
+  
+  test "I create an activity with a picture upload" do
+    fred_activity = @fred_wall.activities.create(:user_id => @fred.id, :img_file_name => 'test', :img => fixture_file_upload('test.jpg', 'image/jpg'))
+    activity_created = Activity.find_by_img_file_name("test.jpg")
+    
+    assert_not_nil activity_created
+    assert_not_nil activity_created.img
+    
   end
   
 end
