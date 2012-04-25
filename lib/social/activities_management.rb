@@ -8,16 +8,18 @@ module ActivitiesManagement
  
   module ClassMethods
     def initialize
-      attr_accessible :text_comment_title, :text_comment, :img_file_name, :user_id, :group_id,
+      attr_accessible :text_comment_title, :text_comment, :img_file_name, :user_id, :group_id, :img,
                       :img_content_type, :img_file_size, :img_updated_at, :src_url, :user_fullname
                       
                       
-      #has_attached_file :img, {:styles => {:thumb => "114x114>", :medium => "216x156>"}}
+      has_attached_file :img, {:styles => {:thumb => "114x114>", :medium => "216x156>"}}
       
       belongs_to :user
       belongs_to :group
       has_many :wallevents
       has_many :walls, :through => :wallevents
+      
+      validates :user_id, :presence => true
       
       
       default_scope order('created_at')

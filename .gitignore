@@ -15,4 +15,4 @@
 /tmp
 
 # Ignore redcar files
-.redcar
+/.redcar
