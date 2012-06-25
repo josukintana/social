@@ -9,6 +9,8 @@ class CreateActivities < ActiveRecord::Migration
       t.datetime :img_updated_at
       t.string :src_url
       t.string :user_fullname
+      t.integer :group_id
+
       t.integer :user_id
 
       t.timestamps
